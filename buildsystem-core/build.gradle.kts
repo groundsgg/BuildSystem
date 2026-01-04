@@ -166,6 +166,10 @@ bukkit {
             description = "Teleports you to the highest location."
             usage = "/<command>"
         }
+        register("warp") {
+            description = "Teleport to a warp location."
+            usage = "/<command> <name> | set <name> | remove <name> | list"
+        }
         register("worlds") {
             description = "Open the world menu."
             aliases = listOf("w")
@@ -228,6 +232,22 @@ bukkit {
         register("buildsystem.updates") {
             description = "Receive update messages."
             default = BukkitPluginDescription.Permission.Default.OP
+        }
+        register("buildsystem.warp") {
+            description = "Teleport to warps."
+            default = BukkitPluginDescription.Permission.Default.TRUE
+        }
+        register("buildsystem.warp.set") {
+            description = "Create or update warps."
+            default = BukkitPluginDescription.Permission.Default.OP
+        }
+        register("buildsystem.warp.remove") {
+            description = "Delete warps."
+            default = BukkitPluginDescription.Permission.Default.OP
+        }
+        register("buildsystem.warp.list") {
+            description = "List all warps."
+            default = BukkitPluginDescription.Permission.Default.TRUE
         }
     }
 }

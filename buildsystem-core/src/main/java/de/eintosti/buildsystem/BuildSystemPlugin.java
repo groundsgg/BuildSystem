@@ -38,6 +38,7 @@ import de.eintosti.buildsystem.command.SpawnCommand;
 import de.eintosti.buildsystem.command.SpeedCommand;
 import de.eintosti.buildsystem.command.TimeCommand;
 import de.eintosti.buildsystem.command.TopCommand;
+import de.eintosti.buildsystem.command.WarpCommand;
 import de.eintosti.buildsystem.command.WorldsCommand;
 import de.eintosti.buildsystem.command.tabcomplete.BuildTabCompleter;
 import de.eintosti.buildsystem.command.tabcomplete.ConfigTabCompleter;
@@ -47,6 +48,7 @@ import de.eintosti.buildsystem.command.tabcomplete.PhysicsTabCompleter;
 import de.eintosti.buildsystem.command.tabcomplete.SpawnTabCompleter;
 import de.eintosti.buildsystem.command.tabcomplete.SpeedTabCompleter;
 import de.eintosti.buildsystem.command.tabcomplete.TimeTabCompleter;
+import de.eintosti.buildsystem.command.tabcomplete.WarpTabCompleter;
 import de.eintosti.buildsystem.command.tabcomplete.WorldsTabCompleter;
 import de.eintosti.buildsystem.config.Config;
 import de.eintosti.buildsystem.config.Config.Folder;
@@ -90,6 +92,7 @@ import de.eintosti.buildsystem.player.settings.SettingsManager;
 import de.eintosti.buildsystem.util.UpdateChecker;
 import de.eintosti.buildsystem.util.inventory.InventoryManager;
 import de.eintosti.buildsystem.world.SpawnManager;
+import de.eintosti.buildsystem.world.WarpManager;
 import de.eintosti.buildsystem.world.WorldServiceImpl;
 import de.eintosti.buildsystem.world.backup.BackupService;
 import de.eintosti.buildsystem.world.display.CustomizableIcons;
@@ -125,6 +128,7 @@ public class BuildSystemPlugin extends JavaPlugin {
     private NoClipManager noClipManager;
     private SettingsManager settingsManager;
     private SpawnManager spawnManager;
+    private WarpManager warpManager;
     private WorldServiceImpl worldService;
     private BackupService backupService;
     private CustomizableIcons customizableIcons;
@@ -235,6 +239,7 @@ public class BuildSystemPlugin extends JavaPlugin {
         this.backupService = new BackupService(this);
         this.settingsManager = new SettingsManager(this);
         this.spawnManager = new SpawnManager(this);
+        this.warpManager = new WarpManager(this);
     }
 
     private void registerCommands() {
@@ -254,6 +259,7 @@ public class BuildSystemPlugin extends JavaPlugin {
         new SpeedCommand(this);
         new TimeCommand(this);
         new TopCommand(this);
+        new WarpCommand(this);
         new WorldsCommand(this);
     }
 
@@ -266,6 +272,7 @@ public class BuildSystemPlugin extends JavaPlugin {
         new SpawnTabCompleter(this);
         new SpeedTabCompleter(this);
         new TimeTabCompleter(this);
+        new WarpTabCompleter(this);
         new WorldsTabCompleter(this);
     }
 
@@ -392,7 +399,8 @@ public class BuildSystemPlugin extends JavaPlugin {
         CompletableFuture<Void> worldSave = worldService.save();
         CompletableFuture<Void> playerSave = playerService.save();
         CompletableFuture<Void> spawnSave = spawnManager.save();
-        return CompletableFuture.allOf(worldSave, playerSave, spawnSave);
+        CompletableFuture<Void> warpSave = warpManager.save();
+        return CompletableFuture.allOf(worldSave, playerSave, spawnSave, warpSave);
     }
 
     /**
@@ -445,6 +453,10 @@ public class BuildSystemPlugin extends JavaPlugin {
 
     public SpawnManager getSpawnManager() {
         return spawnManager;
+    }
+
+    public WarpManager getWarpManager() {
+        return warpManager;
     }
 
     public WorldServiceImpl getWorldService() {

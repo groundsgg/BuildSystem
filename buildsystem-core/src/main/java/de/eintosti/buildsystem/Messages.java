@@ -214,6 +214,16 @@ public class Messages {
         setMessage(config, sb, "spawn_world_not_imported", "%prefix% &cWorld must be imported: /worlds import <world>");
         setMessage(config, sb, "spawn_set", "%prefix% &7Spawn set to &b%x% %y% %z% &7in &b%world%&7.");
         setMessage(config, sb, "spawn_remove", "%prefix% &7The spawn was removed.");
+
+        setMessage(config, sb, "warp_usage", "%prefix% &7Usage: &b/warp <name>");
+        setMessage(config, sb, "warp_admin", "%prefix% &7Usage: &b/warp <name> | set <name> | remove <name> | list");
+        setMessage(config, sb, "warp_teleported", "%prefix% &7You were teleported to &b%warp%&7.");
+        setMessage(config, sb, "warp_not_found", "%prefix% &cWarp &b%warp% &cdoes not exist.");
+        setMessage(config, sb, "warp_set", "%prefix% &7Warp &b%warp% &7was set.");
+        setMessage(config, sb, "warp_removed", "%prefix% &7Warp &b%warp% &7was removed.");
+        setMessage(config, sb, "warp_list_header", "%prefix% &7Available warps:");
+        setMessage(config, sb, "warp_list_entry", "&7 - &b%warp%");
+        setMessage(config, sb, "warp_list_empty", "%prefix% &cNo warps available.");
         addSpacer(sb, "");
         addSpacer(sb, "# /speed");
         setMessage(config, sb, "speed_usage", "%prefix% &7Usage: &b/speed [1-5]");
